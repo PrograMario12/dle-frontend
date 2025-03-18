@@ -1,0 +1,8 @@
+/* Asegúrate de que el archivo CSS esté importado en tu componente */
+input {
+    text-align: center;
+  }
+
+input::placeholder {
+    text-align: center;
+  }

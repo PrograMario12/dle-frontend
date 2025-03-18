@@ -1,0 +1,51 @@
+
+  /* Estilos adicionales para los componentes internos */
+  .principal {
+    width: 100%;
+    text-align: center;
+  }
+
+  .principal > * {
+    margin: 20px 0;
+  }
+
+  /* Estilos específicos para los componentes */
+  .clock {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 150px;
+  }
+
+  .logo img {
+    max-width: 200px;
+  }
+
+  .card-scanner {
+    width: 80%;
+  }
+
+  .card-title {
+    font-size: 48px;
+  }
+
+  .card-scanner input {
+    padding: 10px;
+    font-size: 32px;
+  }
+
+  .footer {
+    width: 100%;
+    padding: 10px;
+    background-color: #f8f9fa;
+  }
+
+  .footer .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .footer button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
