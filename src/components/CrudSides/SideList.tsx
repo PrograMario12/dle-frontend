@@ -6,7 +6,7 @@ interface Side {
     side_id: number;
     station_id: number;
     employee_necessary: number;
-    side_desc: string;
+    type_side_desc: string;
 }
 
 const SideList = () => {
@@ -68,7 +68,7 @@ const SideList = () => {
                         className="list-group-item text-capitalize d-flex justify-content-between align-items-center"
                     >
                         <div>
-                            <span className="me-3">{side.side_desc}</span>
+                            <span className="me-3">{side.type_side_desc}</span>
                             <span className="badge bg-primary me-3">Empleados necesarios: {side.employee_necessary}</span>
                         </div>
                         <div>

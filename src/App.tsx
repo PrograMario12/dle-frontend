@@ -17,6 +17,9 @@ import EditStation from './components/CrudStations/EditStation';
 import SideList from './components/CrudSides/SideList';
 import AddSide from './components/CrudSides/AddSide';
 import EditSide from './components/CrudSides/EditSide';
+import SelectAreaAssets from './components/Selection/SelectAreaAssets';
+import SelectModelAssets from './components/Selection/SelectModelAssets';
+import RegisterStation from './components/Register/RegisterStation';
 
 import 'bootstrap/dist/css/bootstrap.min.css'; // Importa el CSS de Bootstrap
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Importa el JS de Bootstrap
@@ -43,6 +46,9 @@ function App() {
           <Route path="/admin/sides/:station_id" element={<SideList />} />
           <Route path="/admin/new-side/:station_id" element={<AddSide />} />
           <Route path="/admin/edit-side/:id" element={<EditSide />} />
+          <Route path="/config/area-assets/:area_id" element={<SelectAreaAssets />} />
+          <Route path="/config/model-assets/:area_asset_id" element={<SelectModelAssets />} />
+          <Route path="/register-station/:cardNumber" element={<RegisterStation />} />
           <Route path="*" element={<h1>Not Found</h1>} />
         </Routes>
       </Router>

@@ -18,7 +18,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="footer bg-dark text-white py-3">
       <div className="container d-flex justify-content-between align-items-center">
-        <p className="mb-0">{line}</p>
+        <p className="mb-0 text-capitalize">{line}</p>
         <div className="buttons">
           <button className="btn btn-primary mx-2" onClick={handleSettingsClick}>
             <i className="bi bi-gear"></i>

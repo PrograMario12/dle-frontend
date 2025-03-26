@@ -10,31 +10,49 @@ interface ModelAsset {
 
 const ModelAssetList = () => {
     const [modelAssets, setModelAssets] = useState<ModelAsset[]>([]);
+    const [error, setError] = useState<string | null>(null);
     const { area_asset_id } = useParams<{ area_asset_id: string }>();
     const navigate = useNavigate();
 
     useEffect(() => {
-        const apiUrl = import.meta.env.VITE_API_URL;
-        axios.get(`${apiUrl}/model-assets/area-asset/${area_asset_id}`)
-            .then(response => {
-                console.log('Fetched model assets:', response.data);
-                setModelAssets(response.data);
-            })
-            .catch(error => console.error('Error fetching model assets:', error));
+        fetchModelAssets();
     }, [area_asset_id]);
 
-    const handleDelete = (model_asset_id: number): void => {
+    const fetchModelAssets = async () => {
         const apiUrl = import.meta.env.VITE_API_URL;
-        axios.delete(`${apiUrl}/model-assets/${model_asset_id}`)
-            .then(() => {
-                setModelAssets(prevModelAssets => prevModelAssets.filter(modelAsset => modelAsset.model_asset_id !== model_asset_id));
-            })
-            .catch(error => console.error('Error deleting model asset:', error));
+        try {
+            const response = await axios.get(`${apiUrl}/model-assets/area-asset/${area_asset_id}`);
+            setModelAssets(response.data);
+            setError(null);
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                const errorMessage = error.response?.data?.error || error.message;
+                setError(errorMessage);
+                console.error('Error fetching model assets:', errorMessage);
+            } else {
+                setError('Unexpected error occurred');
+                console.error('Unexpected error:', error);
+            }
+        }
+    };
+
+    const handleDelete = async (model_asset_id: number) => {
+        const apiUrl = import.meta.env.VITE_API_URL;
+        try {
+            await axios.delete(`${apiUrl}/model-assets/${model_asset_id}`);
+            setModelAssets(prevModelAssets => prevModelAssets.filter(modelAsset => modelAsset.model_asset_id !== model_asset_id));
+            setError(null);
+        } catch (error) {
+            const errorMessage = axios.isAxiosError(error) ? (error.response?.data?.error || 'Error deleting model asset') : 'Unexpected error occurred';
+            setError(errorMessage);
+            console.error('Error deleting model asset:', errorMessage);
+        }
     };
 
     return (
         <div className="container mt-5">
             <h2 className="mb-4">Modelos de Activo</h2>
+            {error && <div className="alert alert-danger">{error}</div>}
             <button className="btn btn-secondary mb-3" onClick={() => navigate(`/admin/area-assets/${area_asset_id}`)}>
                 Regresar a Activos de Área
             </button>

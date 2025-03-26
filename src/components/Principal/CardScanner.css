@@ -1,0 +1,17 @@
+
+/* Estilo para ocultar los caracteres ingresados */
+.masked-input {
+  font-family: 'password'; /* Usa una fuente que oculte los caracteres */
+  -webkit-text-security: disc; /* Oculta los caracteres en navegadores basados en WebKit */
+  /* Removed invalid property 'text-security' */
+}
+
+/* Elimina cualquier botón de mostrar contraseña */
+input[type="text"]::-ms-reveal,
+input[type="text"]::-ms-clear,
+input[type="text"]::-webkit-clear-button,
+input[type="text"]::-webkit-inner-spin-button,
+input[type="text"]::-webkit-outer-spin-button,
+input[type="text"]::-webkit-textfield-decoration-container {
+  display: none;
+}

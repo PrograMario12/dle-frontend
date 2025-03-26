@@ -14,18 +14,28 @@ export const AppContext = createContext<AppContextProps>({
 });
 
 export const AppProvider: React.FC = ({ children }) => {
+  const apiUrl = import.meta.env.VITE_API_URL;
   const [line, setLineState] = useState<string>(() => {
     // Leer el valor inicial de localStorage
-    const savedLine = localStorage.getItem('line');
+    const savedLine = localStorage.getItem('selectedModelAssetId');
+    if (savedLine) {
+      fetch(`${apiUrl}/config/${savedLine}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log('Fetched line data:', data);
+        setLineState(`${data.area_asset_name} ${data.area_asset_number} ${data.model_asset_name}`);
+      })
+      .catch(error => console.error('Error fetching line name:', error));
+    }
     return savedLine || '';
   });
 
   const setLine = (newLine: string) => {
     setLineState(newLine);
-    localStorage.setItem('line', newLine); // Guardar en localStorage
+    localStorage.setItem('line', newLine);
   };
 
-  const hasPermission = true; // Aquí puedes implementar la lógica real de permisos
+  const hasPermission = true;
 
   return (
     <AppContext.Provider value={{ line, setLine, hasPermission }}>
